@@ -11,13 +11,13 @@ public class VegetableFilter {
             "Tomato", "pepper", "Onion", "carrot");
     @Test
     void printFruits (){
-        Fruits fruits = new Fruits(fruitsAndVegetable);
-        System.out.printf("\n \n List fruits: \n %s", fruits.getFruits());
+        Harvest fruits = new Fruits(fruitsAndVegetable);
+        System.out.printf("\n \n List fruits: \n %s", fruits.choose());
     }
 
     @Test
     void printVegetable (){
-        Fruits vegetables = new GetVegetable(fruitsAndVegetable);
-        System.out.printf("\n List vegetable: \n %s", vegetables.getFruits());
+        Harvest vegetables = new Vegetable(fruitsAndVegetable);
+        System.out.printf("\n List vegetable: \n %s", vegetables.choose());
     }
 }
