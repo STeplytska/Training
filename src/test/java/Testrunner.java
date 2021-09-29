@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 class Testrunner {
@@ -16,19 +17,19 @@ class Testrunner {
         fruitsAndVegetable.forEach(System.out::println);
         System.out.println("Result : " + getApple(fruitsAndVegetable));
     }
+
     private String getApple(final List<Food> fruitsAndVegetable) {
         return fruitsAndVegetable
                 .stream()
                 .filter(f -> "Apple".equalsIgnoreCase(f.getName()))
                 .findFirst()
                 .map(Food::getName)
-                .orElseThrow(()-> new IllegalStateException("ooo not have apple"));
+                .orElseThrow(() -> new IllegalStateException("ooo not have apple"));
     }
 
     @Test
     void testFruitTask() {
-        System.out.println("List fruits: \n");
-        getFruits(fruitsAndVegetable).forEach(System.out::println);
+        System.out.println("List fruits: \n" + getFruits(fruitsAndVegetable));
     }
 
     @Test
@@ -40,21 +41,22 @@ class Testrunner {
     private List<String> getFruits(final List<Food> fruitsAndVegetable) {
         return fruitsAndVegetable
                 .stream()
-                .filter(Fruit.class::isInstance)
-//                .filter(f -> f instanceof Fruit)
+                .filter(Objects::nonNull)
+                .filter(f -> "Fruit".equalsIgnoreCase(f.getType()))
                 .map(Food::getName)
                 .collect(Collectors.toList());
-//                .orElseThrow(() -> new NotFoundException("ooo not have apple"));
 
+//        if(result.isEmpty()) {
+//            throw  new IllegalStateException("ooo not have apple");
+//        }
     }
 
     private List<String> getVegetable(final List<Food> fruitsAndVegetable) {
         return fruitsAndVegetable
                 .stream()
-                .filter(Vegetable.class::isInstance)
-//                .filter(f -> f instanceof Vegetable)
+                .filter(Objects::nonNull)
+                .filter(f -> "Vegetable".equalsIgnoreCase(f.getType()))
                 .map(Food::getName)
                 .collect(Collectors.toList());
-//                .orElseThrow(()-> new IllegalStateException("ooo not have apple"));
     }
 }
